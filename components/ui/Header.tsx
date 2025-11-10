@@ -30,15 +30,15 @@ export const Header: React.FC = () => {
       <div className="relative mb-6">
         <h1 className="text-5xl md:text-7xl font-bold animate-fade-in drop-shadow-2xl">
           <span className="relative inline-block">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500">
-              CYBER
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">
+              GITHUB
             </span>
             {/* Enhanced glow effect */}
-            <span className="absolute inset-0 text-cyan-300 blur-sm opacity-75 animate-pulse">
-              CYBER
+            <span className="absolute inset-0 text-orange-400 blur-sm opacity-75 animate-pulse">
+              GITHUB
             </span>
-            <span className="absolute inset-0 text-cyan-400 blur-md opacity-50 animate-pulse" style={{ animationDelay: '0.3s' }}>
-              CYBER
+            <span className="absolute inset-0 text-orange-500 blur-md opacity-50 animate-pulse" style={{ animationDelay: '0.3s' }}>
+              GITHUB
             </span>
           </span>
           <br className="md:hidden" />
@@ -65,7 +65,7 @@ export const Header: React.FC = () => {
         {/* Tech Badges */}
         <div className="flex flex-wrap justify-center gap-3 mt-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
           <div className="px-3 py-1.5 bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-400/30 rounded-full text-sm text-cyan-300 font-mono backdrop-blur-sm hover:border-cyan-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25">
-            <span className="text-cyan-400">◇</span> Gemini AI
+            <span className="text-cyan-400">◇</span> AI Commit
           </div>
           <div className="px-3 py-1.5 bg-gradient-to-r from-blue-900/50 to-purple-900/50 border border-blue-400/30 rounded-full text-sm text-blue-300 font-mono backdrop-blur-sm hover:border-blue-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25">
             <span className="text-blue-400">◇</span> Conventional Commits
