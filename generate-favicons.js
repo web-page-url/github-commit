@@ -1,4 +1,5 @@
 const sharp = require('sharp');
+const toIco = require('to-ico');
 const fs = require('fs');
 const path = require('path');
 
@@ -25,30 +26,35 @@ async function generateFavicons() {
     console.log('Generating favicons...');
     
     // Generate favicons for each size
+    const buffers = [];
     for (const size of sizes) {
       const outputImage = path.join(faviconDir, `favicon-${size}x${size}.png`);
-      await sharp(inputImage)
+      const buffer = await sharp(inputImage)
         .resize(size, size, {
           fit: 'contain',
           background: { r: 0, g: 0, b: 0, alpha: 0 } // Transparent background
         })
         .png()
-        .toFile(outputImage);
+        .toBuffer();
       
+      // Save the file
+      await sharp(buffer).toFile(outputImage);
       console.log(`Generated ${size}x${size} favicon`);
+      
+      // Store buffers for ICO generation (only common sizes)
+      if ([16, 32, 48].includes(size)) {
+        buffers.push(buffer);
+      }
     }
     
-    // Also generate a 32x32 favicon.ico file
+    // Generate a multi-size favicon.ico file
     const icoOutput = path.join(__dirname, 'public', 'favicon.ico');
-    await sharp(inputImage)
-      .resize(32, 32, {
-        fit: 'contain',
-        background: { r: 0, g: 0, b: 0, alpha: 0 }
-      })
-      .png()
-      .toFile(icoOutput);
+    const icoBuffer = await toIco(buffers, {
+      resize: false
+    });
     
-    console.log('Generated favicon.ico');
+    fs.writeFileSync(icoOutput, icoBuffer);
+    console.log('Generated favicon.ico with multiple sizes');
     
     console.log('Favicon generation complete!');
   } catch (error) {
