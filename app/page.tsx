@@ -1,65 +1,147 @@
-import Image from "next/image";
+'use client';
+
+import React, { useState } from 'react';
+import { Header } from '../components/ui/Header';
+import { InputArea } from '../components/ui/InputArea';
+import { OutputArea } from '../components/ui/OutputArea';
+import { ActionButton } from '../components/ui/ActionButton';
+import { SparklesIcon } from '../components/icons';
+import { generateCommitMessage } from '../services/gemini';
 
 export default function Home() {
+  const [diff, setDiff] = useState('');
+  const [commitMessage, setCommitMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const exampleDiff = `diff --git a/src/components/Button.tsx b/src/components/Button.tsx
+index 83d1c87..b2e4f56 100644
+--- a/src/components/Button.tsx
++++ b/src/components/Button.tsx
+@@ -1,7 +1,7 @@
+ import React from 'react';
+
+ interface ButtonProps {
+-  children: React.ReactNode;
++  children: React.ReactNode;
+   onClick?: () => void;
+   variant?: 'primary' | 'secondary';
+ }
+
+@@ -12,6 +12,7 @@ export const Button: React.FC<ButtonProps> = ({
+   return (
+     <button
+       onClick={onClick}
++      disabled={disabled}
+       className="btn primary"
+     >
+       {children}
+     </button>
+   );
+ });`;
+
+  const handleGenerate = async () => {
+    if (!diff.trim()) {
+      setError('Please enter your code changes first.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+    setCommitMessage('');
+
+    try {
+      const message = await generateCommitMessage(diff);
+      setCommitMessage(message);
+    } catch (err) {
+      setError('Failed to generate commit message. Please check your API key and try again.');
+      console.error('Error generating commit message:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDiff(event.target.value);
+    if (error) setError('');
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen py-4 px-3 sm:py-8 sm:px-4 flex items-center justify-center">
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full flex flex-col items-center justify-center space-y-8 sm:space-y-12">
+          {/* Header Section */}
+          <div className="animate-fade-in w-full flex justify-center">
+            <div className="w-full max-w-4xl text-center">
+              <Header />
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <main className="w-full flex flex-col items-center space-y-6 sm:space-y-8">
+            {/* Input Section */}
+            <div className="animate-slide-in-up w-full max-w-4xl px-4 sm:px-0" style={{ animationDelay: '0.2s' }}>
+              <InputArea
+                value={diff}
+                onChange={handleInputChange}
+                placeholder="Paste your git diff output here for optimal results..."
+                exampleInput={exampleDiff}
+              />
+            </div>
+
+            {/* Error Display */}
+            {error && (
+              <div className="animate-fade-in w-full max-w-3xl px-4 sm:px-0" style={{ animationDelay: '0.1s' }}>
+                <div className="p-4 bg-red-900/50 border border-red-500/30 rounded-xl text-red-300 backdrop-blur-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                    <span className="font-mono text-sm tracking-wide">SYSTEM ERROR</span>
+                  </div>
+                  <p className="mt-2 text-sm">{error}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Action Button */}
+            <div className="animate-slide-in-up w-full flex justify-center px-4 sm:px-0" style={{ animationDelay: '0.4s' }}>
+              <ActionButton
+                onClick={handleGenerate}
+                disabled={isLoading || !diff.trim()}
+                variant="primary"
+                size="lg"
+                className="w-full max-w-md sm:w-auto touch-manipulation"
+              >
+                <SparklesIcon className="w-5 h-5 mr-2" />
+                {isLoading ? 'PROCESSING...' : 'GENERATE COMMIT MESSAGE'}
+              </ActionButton>
+            </div>
+
+            {/* Output Section */}
+            <div className="animate-slide-in-up w-full max-w-4xl px-4 sm:px-0" style={{ animationDelay: '0.6s' }}>
+              <OutputArea message={commitMessage} isLoading={isLoading} />
+            </div>
+          </main>
+
+          {/* Footer */}
+          <footer className="w-full max-w-4xl mt-8 sm:mt-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <div className="border-t border-cyan-400/20 pt-8">
+              <div className="text-center">
+                <p className="text-sm text-slate-400 font-mono">
+                  Created by{' '}
+                  <a
+                    href="https://anubhav-webpage.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 underline decoration-cyan-400/50 hover:decoration-cyan-300"
+                  >
+                    Anubhav
+                  </a>
+                </p>
+              </div>
+            </div>
+          </footer>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
