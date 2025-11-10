@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../components/ui/Header';
 import { InputArea } from '../components/ui/InputArea';
 import { OutputArea } from '../components/ui/OutputArea';
@@ -13,6 +13,14 @@ export default function Home() {
   const [commitMessage, setCommitMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // Adding top margin to the entire page
+  useEffect(() => {
+    document.body.style.marginTop = '1rem';
+    return () => {
+      document.body.style.marginTop = '';
+    };
+  }, []);
 
   const exampleDiff = `diff --git a/src/components/Button.tsx b/src/components/Button.tsx
 index 83d1c87..b2e4f56 100644
@@ -67,9 +75,9 @@ index 83d1c87..b2e4f56 100644
   };
 
   return (
-    <div className="min-h-screen py-4 px-3 sm:py-8 sm:px-4 flex items-center justify-center">
+    <div className="min-h-screen py-4 px-4 sm:py-8 sm:px-6 flex items-center justify-center">
       <div className="w-full max-w-6xl mx-auto">
-        <div className="w-full flex flex-col items-center justify-center space-y-8 sm:space-y-12">
+        <div className="w-full flex flex-col items-center justify-center gap-8 sm:gap-10">
           {/* Header Section */}
           <div className="animate-fade-in w-full flex justify-center">
             <div className="w-full max-w-4xl text-center">
@@ -78,7 +86,7 @@ index 83d1c87..b2e4f56 100644
           </div>
 
           {/* Main Content */}
-          <main className="w-full flex flex-col items-center space-y-6 sm:space-y-8">
+          <main className="w-full flex flex-col items-center gap-8 sm:gap-10">
             {/* Input Section */}
             <div className="animate-slide-in-up w-full max-w-4xl px-4 sm:px-0" style={{ animationDelay: '0.2s' }}>
               <InputArea
@@ -103,7 +111,7 @@ index 83d1c87..b2e4f56 100644
             )}
 
             {/* Action Button */}
-            <div className="animate-slide-in-up w-full flex justify-center px-4 sm:px-0" style={{ animationDelay: '0.4s' }}>
+            <div className="animate-slide-in-up w-full flex justify-center px-4 sm:px-0 my-8" style={{ animationDelay: '0.4s' }}>
               <ActionButton
                 onClick={handleGenerate}
                 disabled={isLoading || !diff.trim()}
@@ -123,7 +131,7 @@ index 83d1c87..b2e4f56 100644
           </main>
 
           {/* Footer */}
-          <footer className="w-full max-w-4xl mt-8 sm:mt-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+          <footer className="w-full max-w-4xl mt-10 sm:mt-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
             <div className="border-t border-cyan-400/20 pt-8">
               <div className="text-center">
                 <p className="text-sm text-slate-400 font-mono">

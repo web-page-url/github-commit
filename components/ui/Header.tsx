@@ -3,7 +3,7 @@ import { CommitIcon, SparklesIcon } from '../icons';
 
 export const Header: React.FC = () => {
   return (
-    <header className="text-center relative mb-16">
+    <header className="text-center relative mb-4">
       {/* Animated Background Glow */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-radial from-cyan-500/20 via-blue-500/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
       </div>
 
       {/* Icon Container with Cyberpunk Styling */}
-      <div className="relative inline-block mb-12">
+      <div className="relative inline-block mb-6">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full blur-lg opacity-75 animate-glow-pulse"></div>
         <div className="relative p-6 bg-gradient-to-br from-gray-900 via-gray-800 to-black border-2 border-cyan-400/50 rounded-full shadow-2xl">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full animate-cyber-scan"></div>
@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
       </div>
 
       {/* Main Title with Advanced Animations */}
-      <div className="relative mb-10">
+      <div className="relative mb-6">
         <h1 className="text-5xl md:text-7xl font-bold animate-fade-in drop-shadow-2xl">
           <span className="relative inline-block">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500">
@@ -56,28 +56,28 @@ export const Header: React.FC = () => {
 
       {/* Subtitle with Cyberpunk Styling */}
       <div className="relative max-w-3xl mx-auto mt-2">
-        <p className="text-xl md:text-2xl text-slate-300 leading-relaxed animate-slide-in-up mb-8">
+        <p className="text-xl md:text-2xl text-slate-300 leading-relaxed animate-slide-in-up mb-4">
           <span className="text-cyan-400 font-semibold">AI-Powered</span> commit message generation
           <br className="hidden md:block" />
           <span className="text-purple-400">⚡</span> Transform your git history with professional conventional commits
         </p>
 
         {/* Tech Badges */}
-        <div className="flex flex-wrap justify-center gap-4 mt-8 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-          <div className="px-4 py-2 bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-400/30 rounded-full text-sm text-cyan-300 font-mono backdrop-blur-sm hover:border-cyan-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25">
+        <div className="flex flex-wrap justify-center gap-3 mt-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+          <div className="px-3 py-1.5 bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-400/30 rounded-full text-sm text-cyan-300 font-mono backdrop-blur-sm hover:border-cyan-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25">
             <span className="text-cyan-400">◇</span> Gemini AI
           </div>
-          <div className="px-4 py-2 bg-gradient-to-r from-blue-900/50 to-purple-900/50 border border-blue-400/30 rounded-full text-sm text-blue-300 font-mono backdrop-blur-sm hover:border-blue-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25">
+          <div className="px-3 py-1.5 bg-gradient-to-r from-blue-900/50 to-purple-900/50 border border-blue-400/30 rounded-full text-sm text-blue-300 font-mono backdrop-blur-sm hover:border-blue-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25">
             <span className="text-blue-400">◇</span> Conventional Commits
           </div>
-          <div className="px-4 py-2 bg-gradient-to-r from-purple-900/50 to-pink-900/50 border border-purple-400/30 rounded-full text-sm text-purple-300 font-mono backdrop-blur-sm hover:border-purple-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25">
+          <div className="px-3 py-1.5 bg-gradient-to-r from-purple-900/50 to-pink-900/50 border border-purple-400/30 rounded-full text-sm text-purple-300 font-mono backdrop-blur-sm hover:border-purple-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25">
             <span className="text-purple-400">◇</span> Cyberpunk UI
           </div>
         </div>
       </div>
 
       {/* Bottom Accent Line */}
-      <div className="mt-12 flex justify-center">
+      <div className="mt-4 flex justify-center">
         <div className="w-32 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse"></div>
       </div>
     </header>

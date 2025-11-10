@@ -38,7 +38,7 @@ const LoadingHologram: React.FC = () => (
       ))}
 
       {/* Loading Indicator */}
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-4">
         <div className="flex gap-2">
           {[...Array(3)].map((_, i) => (
             <div
@@ -101,14 +101,14 @@ export const OutputArea: React.FC<OutputAreaProps> = ({ message, isLoading }) =>
   return (
     <div className="relative">
       {/* Label with Cyberpunk Styling */}
-      <div className="flex items-center mb-4">
-        <div className="flex items-center gap-2">
-          <SparklesIcon className="w-5 h-5 text-purple-400 animate-pulse" />
-          <label className="text-lg font-semibold text-purple-300 font-mono tracking-wide">
+      <div className="flex items-center mb-4 mt-2">
+        <div className="flex items-center gap-4">
+          <SparklesIcon className="w-7 h-7 text-purple-400 animate-pulse" />
+          <label className="text-2xl font-semibold text-purple-300 font-mono tracking-wide">
             AI GENERATED OUTPUT
           </label>
         </div>
-        <div className="flex-1 ml-4 h-px bg-gradient-to-r from-purple-400/50 via-transparent to-transparent"></div>
+        <div className="flex-1 ml-8 h-px bg-gradient-to-r from-purple-400/50 via-transparent to-transparent"></div>
       </div>
 
       {/* Output Container */}
@@ -185,8 +185,8 @@ export const OutputArea: React.FC<OutputAreaProps> = ({ message, isLoading }) =>
                 </div>
 
                 {/* Message Content */}
-                <div className="pr-20">
-                  <pre className="whitespace-pre-wrap text-slate-200 font-mono text-sm leading-relaxed">
+                <div className="pr-24 mt-2">
+                  <pre className="whitespace-pre-wrap text-slate-200 font-mono text-sm leading-loose">
                     <code className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300">
                       {message}
                     </code>

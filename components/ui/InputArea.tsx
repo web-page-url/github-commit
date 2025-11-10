@@ -14,14 +14,14 @@ export const InputArea: React.FC<InputAreaProps> = ({ value, onChange, placehold
   return (
     <div className="relative">
       {/* Label with Cyberpunk Styling */}
-      <div className="flex items-center mb-4 mt-6">
-        <div className="flex items-center gap-2">
-          <SparklesIcon className="w-5 h-5 text-cyan-400 animate-pulse" />
-          <label htmlFor="diff-input" className="text-lg font-semibold text-cyan-300 font-mono tracking-wide">
+      <div className="flex items-center mb-4">
+        <div className="flex items-center gap-3">
+          <SparklesIcon className="w-6 h-6 text-cyan-400 animate-pulse" />
+          <label htmlFor="diff-input" className="text-xl font-semibold text-cyan-300 font-mono tracking-wide">
             CODE CHANGES INPUT
           </label>
         </div>
-        <div className="flex-1 ml-4 h-px bg-gradient-to-r from-cyan-400/50 via-transparent to-transparent"></div>
+        <div className="flex-1 ml-6 h-px bg-gradient-to-r from-cyan-400/50 via-transparent to-transparent"></div>
       </div>
 
       {/* Input Container with Cyberpunk Border */}
@@ -61,7 +61,7 @@ export const InputArea: React.FC<InputAreaProps> = ({ value, onChange, placehold
             rows={12}
             className="
               w-full bg-gradient-to-br from-gray-900/90 via-gray-800/80 to-black/90
-              text-slate-200 border-0 rounded-xl p-6 font-mono text-sm
+              text-slate-200 border-0 rounded-xl p-8 font-mono text-sm
               focus:outline-none focus:ring-0 resize-none
               placeholder-slate-500 transition-all duration-300
               scrollbar-thin scrollbar-thumb-cyan-400 scrollbar-track-gray-800
