@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ClipboardIcon, DownloadIcon, CheckIcon, SparklesIcon } from '../icons';
+import { LoadingSpinner } from './LoadingSpinner';
 
 interface OutputAreaProps {
   message: string;
@@ -16,38 +17,10 @@ const LoadingHologram: React.FC = () => (
     <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-cyber-scan" style={{ animationDelay: '1s' }}></div>
 
     {/* Loading Content */}
-    <div className="relative space-y-4 p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
+    <div className="relative space-y-4 p-6 flex flex-col items-center justify-center h-full">
+      <LoadingSpinner size="lg" color="cyan" />
+      <div className="flex items-center gap-3">
         <div className="text-cyan-300 font-mono text-sm tracking-wide">PROCESSING DATA...</div>
-      </div>
-
-      {/* Animated Lines */}
-      {[...Array(4)].map((_, i) => (
-        <div key={i} className="relative">
-          <div className="h-4 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse"></div>
-          <div
-            className="absolute top-0 left-0 h-4 bg-gradient-to-r from-cyan-400/50 via-blue-400/30 to-transparent rounded animate-pulse"
-            style={{
-              width: '60%',
-              animationDelay: `${i * 0.2}s`,
-              animationDuration: '1.5s'
-            }}
-          ></div>
-        </div>
-      ))}
-
-      {/* Loading Indicator */}
-      <div className="flex justify-center mt-4">
-        <div className="flex gap-2">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"
-              style={{ animationDelay: `${i * 0.2}s` }}
-            ></div>
-          ))}
-        </div>
       </div>
     </div>
   </div>

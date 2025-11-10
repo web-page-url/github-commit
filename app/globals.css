@@ -215,25 +215,26 @@ body::after {
   }
 }
 
-/* Scrollbar Styling */
+/* Enhanced Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--cyber-dark);
-  border-radius: 6px;
+  background: rgba(15, 15, 35, 0.5);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--neon-cyan), var(--neon-blue));
-  border-radius: 6px;
-  border: 2px solid var(--cyber-dark);
+  background: linear-gradient(var(--neon-cyan), var(--neon-blue));
+  border-radius: 4px;
+  border: 1px solid var(--border-primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--neon-blue), var(--neon-purple));
-  box-shadow: var(--shadow-neon);
+  background: linear-gradient(var(--neon-blue), var(--neon-purple));
+  border-color: var(--border-secondary);
 }
 
 /* Mobile Enhancements */
@@ -268,17 +269,41 @@ body::after {
   }
 }
 
-/* Focus improvements for accessibility */
+/* Accessibility Improvements */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  
+  body::before {
+    animation: none;
+  }
+}
 
-  body::before,
-  body::after {
-    animation: none !important;
+/* High contrast text support */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: #e5e5e5;
+    --text-muted: #a3a3a3;
+    --cyber-black: #000000;
+    --cyber-dark: #1a1a1a;
+    --cyber-gray: #333333;
+  }
+  
+  a {
+    color: var(--neon-cyan) !important;
+    text-decoration: underline !important;
+  }
+  
+  button, [role="button"] {
+    background-color: var(--cyber-gray) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--text-primary) !important;
   }
 }
 
@@ -293,15 +318,17 @@ body::after {
   }
 }
 
-/* Selection Styling */
+/* Enhanced Selection Styles */
 ::selection {
-  background: rgba(0, 212, 255, 0.3);
-  color: var(--text-primary);
+  background-color: var(--neon-cyan);
+  color: var(--cyber-black);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Focus Styles */
+/* Enhanced Focus Styles */
 :focus-visible {
-  outline: 2px solid var(--neon-cyan);
-  outline-offset: 2px;
+  outline: 3px solid var(--neon-cyan);
+  outline-offset: 3px;
   border-radius: 4px;
+  box-shadow: 0 0 0 2px var(--cyber-black);
 }

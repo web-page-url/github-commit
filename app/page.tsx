@@ -5,6 +5,7 @@ import { Header } from '../components/ui/Header';
 import { InputArea } from '../components/ui/InputArea';
 import { OutputArea } from '../components/ui/OutputArea';
 import { ActionButton } from '../components/ui/ActionButton';
+import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 import { SparklesIcon } from '../components/icons';
 import { generateCommitMessage } from '../services/gemini';
 
@@ -119,8 +120,17 @@ index 83d1c87..b2e4f56 100644
                 size="lg"
                 className="w-full max-w-md sm:w-auto touch-manipulation"
               >
-                <SparklesIcon className="w-5 h-5 mr-2" />
-                {isLoading ? 'PROCESSING...' : 'GENERATE COMMIT MESSAGE'}
+                {isLoading ? (
+                  <>
+                    <LoadingSpinner size="sm" color="cyan" className="mr-2" />
+                    PROCESSING...
+                  </>
+                ) : (
+                  <>
+                    <SparklesIcon className="w-5 h-5 mr-2" />
+                    GENERATE COMMIT MESSAGE
+                  </>
+                )}
               </ActionButton>
             </div>
 
